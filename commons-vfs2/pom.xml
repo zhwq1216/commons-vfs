@@ -23,7 +23,8 @@
 
   <name>Apache Commons VFS</name>
   <artifactId>commons-vfs2</artifactId>
-  <version>2.5.0</version>
+  <!-- 修正sftp组件中的getOutputStream权限异常导致channel没有释放问题 -->
+  <version>2.5.0.1</version>
   <description>Apache Commons VFS is a Virtual File System library.</description>
   <url>http://commons.apache.org/proper/commons-vfs/</url>
 
@@ -378,5 +379,19 @@
         </build>
     </profile>
   </profiles>
+
+  <distributionManagement>
+    <repository>
+      <id>maven-releases</id>
+      <name>Maven Project Release</name>
+      <url>http://10.10.0.89:8088/nexus/repository/maven-releases/</url>
+    </repository>
+
+    <snapshotRepository>
+      <id>maven-snapshots</id>
+      <name>Maven Project SNAPSHOTS</name>
+      <url>http://10.10.0.89:8088/nexus/repository/maven-snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 
 </project>

@@ -480,7 +480,13 @@ public class SftpFileObject extends AbstractFileObject<SftpFileSystem> {
          */
 
         final ChannelSftp channel = getAbstractFileSystem().getChannel();
-        return new SftpOutputStream(channel, channel.put(relPath, bAppend ? ChannelSftp.APPEND : ChannelSftp.OVERWRITE));
+        try {
+            return new SftpOutputStream(channel, channel.put(relPath, bAppend ? ChannelSftp.APPEND : ChannelSftp.OVERWRITE));
+        } catch (Exception ex) {
+            getAbstractFileSystem().putChannel(channel);
+            throw ex;
+        }
+
     }
 
     /**
